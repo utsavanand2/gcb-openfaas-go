@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://146.148.44.80:8080
+functions:
+  hello-world:
+    lang: golang-http
+    handler: ./hello-world
+    image: gcr.io/utsav-talks/hello-world:latest
+
