@@ -1,0 +1,39 @@
+steps:
+- id: "Pull Template"
+  name: 'openfaas/faas-cli:latest-root'
+  args: ['template', 'store', 'pull', golang-http]
+
+- id: "Do a shrinkwrap build"
+  name: 'openfaas/faas-cli:latest-root'
+  args: ['build', '-f', './hello-world.yml', '--shrinkwrap']
+
+- id: "Build the docker image"
+  name: "gcr.io/cloud-builders/docker"
+  args: ['build', '-t=gcr.io/$PROJECT_ID/hello-world:$SHORT_SHA', '-t=gcr.io/$PROJECT_ID/hello-world:latest', '-f', './build/hello-world/Dockerfile', './build/hello-world/']
+
+- id: "Push docker image"
+  name: "gcr.io/cloud-builders/docker"
+  args: ['push', 'gcr.io/$PROJECT_ID/hello-world:latest']
+
+- id: "Login with faas-cli login"
+  name: "openfaas/faas-cli:latest-root"
+  entrypoint: "sh"
+  args: ['-c', 'echo -n $${OPENFAAS_GATEWAY_PASSWD} | faas-cli login --password-stdin -g ${_GATEWAY}']
+  secretEnv: ['OPENFAAS_GATEWAY_PASSWD']
+
+- id: "Deploy to Openfaas"
+  name: "openfaas/faas-cli:latest-root"
+  args: ['deploy', '-f', './hello-world.yml', '-g', '${_GATEWAY}']
+
+options:
+  volumes:
+    - name: 'buildvol'
+      path: '/openfaas'
+
+substitutions:
+  _GATEWAY: http://146.148.44.80:8080
+
+secrets:
+- kmsKeyName: "projects/utsav-talks/locations/global/keyRings/openfaas/cryptoKeys/openfaas-gateway-passwd"
+  secretEnv:
+    OPENFAAS_GATEWAY_PASSWD: "CiQANOAl4EbVrdKnN1vBaRIHGCf8V0TyJrQyRdPRYzj4Hp5tPZcSUQD2+MU+m5jpkgolRKNSYfHNIKVDEMeameqwMID9tP1gviLBhK/cnKXvnpB1UlfRVNIbIuNpdC6+ZAoL5toKrl29XYqzP1pgZrGWZXg4YU1bvQ=="
