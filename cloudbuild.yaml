@@ -31,9 +31,9 @@ options:
       path: '/openfaas'
 
 substitutions:
-  _GATEWAY: http://146.148.44.80:8080
+  _GATEWAY: http://34.68.185.231:8080
 
 secrets:
-- kmsKeyName: "projects/utsav-talks/locations/global/keyRings/openfaas/cryptoKeys/openfaas-gateway-passwd"
+- kmsKeyName: "projects/$PROJECT_ID/locations/global/keyRings/openfaas/cryptoKeys/openfaas-gateway-passwd"
   secretEnv:
-    OPENFAAS_GATEWAY_PASSWD: "CiQANOAl4EbVrdKnN1vBaRIHGCf8V0TyJrQyRdPRYzj4Hp5tPZcSUQD2+MU+m5jpkgolRKNSYfHNIKVDEMeameqwMID9tP1gviLBhK/cnKXvnpB1UlfRVNIbIuNpdC6+ZAoL5toKrl29XYqzP1pgZrGWZXg4YU1bvQ=="
+    OPENFAAS_GATEWAY_PASSWD: "CiQAKhHBe0rvXk4gj5/GD69EzlchawsINVjVhk4nuj21JQUCS4MSUQCE45rqQ4wfIWUMgSyrOBOSUk+K1KBSVE4UKA7yK/ta6cjSc3wcEZT4siF/T3AxH4iLyRQvc0aI+yrySeVk1urZ2xlgNcfK38PpR9+dOYpuFw=="
