@@ -34,6 +34,6 @@ substitutions:
   _GATEWAY: http://34.68.185.231:8080
 
 secrets:
-- kmsKeyName: "projects/$PROJECT_ID/locations/global/keyRings/openfaas/cryptoKeys/openfaas-gateway-passwd"
+- kmsKeyName: "projects/uts-1382/locations/global/keyRings/openfaas/cryptoKeys/openfaas-gateway-passwd"
   secretEnv:
     OPENFAAS_GATEWAY_PASSWD: "CiQAKhHBe0rvXk4gj5/GD69EzlchawsINVjVhk4nuj21JQUCS4MSUQCE45rqQ4wfIWUMgSyrOBOSUk+K1KBSVE4UKA7yK/ta6cjSc3wcEZT4siF/T3AxH4iLyRQvc0aI+yrySeVk1urZ2xlgNcfK38PpR9+dOYpuFw=="
