@@ -1,10 +1,15 @@
 version: 1.0
 provider:
   name: openfaas
-  gateway: http://34.68.185.231:8080
+  gateway: https://openfaas.kumarutsavanand.com
 functions:
   hello-world:
-    lang: golang-http
+    lang: golang-http-armhf
     handler: ./hello-world
-    image: gcr.io/uts-1382/hello-world:latest
+    image: utsavanand2/hello-world:latest
+    build_config:
+      build_args:
+        GO111MODULE: "on"
+        BUILDPLATFORM: linux/arm/v7
+        TARGETPLATFORM: linux/arm/v7
 
